@@ -3,15 +3,14 @@ package com.aliakseipilko.metarutils.Constants.Codes;
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 
-public enum LocationCode implements BaseMetarCode {
-    LOC_ID("");
+public enum UnknownCodes implements BaseMetarCode {
+    UKNWN("Unknown Code");
 
-    private String decode;
+    private final String decode;
 
-    LocationCode(String s) {
+    UnknownCodes(String s) {
         decode = s;
     }
-
 
     @Override
     public String getDecoded() {

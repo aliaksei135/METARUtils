@@ -25,7 +25,7 @@ public class CodeNameDecoder implements BaseBlockDecoder {
         }
 
         Map<String, StatusCodes> result = new HashMap<>();
-        result.put(block, statusCode);
+        result.put(statusCode.getDecoded(), statusCode);
 
         return result;
     }

@@ -31,7 +31,7 @@ public class MetarUtils {
             // Iterate over inner elements of block and append them to decoded metar string
             while (elementIter.hasNext()) {
                 // Append decoded element value to decoded metar string
-                decodedMetar = decodedMetar.concat(elementIter.next().getValue().getDecoded() + "\n");
+                decodedMetar = decodedMetar.concat(elementIter.next().getKey() + "\n");
             }
         }
 
@@ -60,6 +60,7 @@ public class MetarUtils {
                     blockMap.put(token, MetarBlock.RMK);
                     continue;
                 }
+                // Check if after TREND block, if so then must be a Trend
                 if(isAfterTrend){
                     blockMap.put(token, MetarBlock.TREND);
                     continue;
@@ -78,6 +79,8 @@ public class MetarUtils {
                 }
             }
         }
+
+
     }
 
 }
