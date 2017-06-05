@@ -1,7 +1,9 @@
 package com.aliakseipilko.metarutils.Constants.Codes;
 
 
-public enum StatusCodes {
+import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
+
+public enum StatusCodes implements BaseMetarCode {
     METAR("METAR", "(^(METAR)$)"),
     SPECI("Special Report", "(^(SPECI)$)"),
     TREND("Trend Report", "(^(TREND)$)");
@@ -9,7 +11,7 @@ public enum StatusCodes {
     private final String decode;
     private final String regExp;
 
-    private StatusCodes(String s, String r) {
+    StatusCodes(String s, String r) {
         decode = s;
         regExp = r;
     }

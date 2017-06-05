@@ -1,11 +1,12 @@
 package com.aliakseipilko.metarutils;
 
 
+import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 import com.aliakseipilko.metarutils.Constants.MetarBlock;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +17,32 @@ public class MetarUtils {
     }
 
     public String decodeMetarToString(String metar) throws MetarDecodeException {
+        Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = decodeMetarToMap(metar);
+        Iterator<Map.Entry<MetarBlock, Map<String, ? extends BaseMetarCode>>> blockIter = decodedMap.entrySet().iterator();
+        String decodedMetar = "";
+
+        while (blockIter.hasNext()) {
+            // Get block level entry
+            Map.Entry<MetarBlock, Map<String, ? extends BaseMetarCode>> entry = blockIter.next();
+            // Get and append title of block to decoded metar string
+            decodedMetar = decodedMetar.concat(entry.getKey().getDecoded() + ":\n");
+            // Obtain iterator for inner map
+            Iterator<? extends Map.Entry<String, ? extends BaseMetarCode>> elementIter = entry.getValue().entrySet().iterator();
+            // Iterate over inner elements of block and append them to decoded metar string
+            while (elementIter.hasNext()) {
+                // Append decoded element value to decoded metar string
+                decodedMetar = decodedMetar.concat(elementIter.next().getValue().getDecoded() + "\n");
+            }
+        }
+
+        return decodedMetar;
+    }
+
+    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException {
         // Tokenise string
         List<String> tokens = Arrays.asList(metar.split(" "));
 
         Map<String, MetarBlock> blockMap = new HashMap<>();
-        String decodedMetar;
         boolean isAfterRMK = false;
         boolean isAfterTrend = false;
 
@@ -56,9 +78,6 @@ public class MetarUtils {
                 }
             }
         }
-
-
-        return decodedMetar;
     }
 
 }
