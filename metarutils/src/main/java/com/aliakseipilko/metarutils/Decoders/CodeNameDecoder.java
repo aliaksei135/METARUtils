@@ -2,7 +2,7 @@ package com.aliakseipilko.metarutils.Decoders;
 
 
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
-import com.aliakseipilko.metarutils.Constants.Codes.StatusCodes;
+import com.aliakseipilko.metarutils.Constants.Codes.IdentifierCodes;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import java.util.Map;
 public class CodeNameDecoder implements BaseBlockDecoder {
     @Override
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
-        StatusCodes statusCode = null;
+        IdentifierCodes statusCode = null;
         // Check every code
-        for (StatusCodes code : StatusCodes.values()) {
+        for (IdentifierCodes code : IdentifierCodes.values()) {
             if(block.matches(code.getRegExp())){
                 statusCode = code;
             }
@@ -24,7 +24,7 @@ public class CodeNameDecoder implements BaseBlockDecoder {
             throw new MetarDecodeException("Bad indicator group");
         }
 
-        Map<String, StatusCodes> result = new HashMap<>();
+        Map<String, IdentifierCodes> result = new HashMap<>();
         result.put(statusCode.getDecoded(), statusCode);
 
         return result;
