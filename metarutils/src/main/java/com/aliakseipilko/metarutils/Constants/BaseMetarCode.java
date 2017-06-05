@@ -6,4 +6,5 @@ public interface BaseMetarCode {
     String getDecoded();
 
     String getRegExp();
+
 }

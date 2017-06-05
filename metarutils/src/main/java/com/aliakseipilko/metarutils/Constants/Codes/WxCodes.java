@@ -1,63 +1,68 @@
 package com.aliakseipilko.metarutils.Constants.Codes;
 
 
+import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
-public enum WxCodes {
+public enum WxCodes implements BaseMetarCode {
 
     /* Precipitation codes */
-    DZ("Drizzle"),
-    RA("Rain"),
-    SN("Snow"),
-    IC("Ice Crystals"),
-    GR("Hail"),
-    SG("Snow Grains"),
-    PL("Ice Pellets"),
-    GS("Small Hail"),
-    UP("Unknown Precipitation"),
+    DZ("Drizzle", "(DZ)"),
+    RA("Rain", "(RA)"),
+    SN("Snow", "(SN)"),
+    IC("Ice Crystals", "(IC)"),
+    GR("Hail", "(GR)"),
+    SG("Snow Grains", "(SG)"),
+    PL("Ice Pellets", "(PL)"),
+    GS("Small Hail", "(GS)"),
+    UP("Unknown Precipitation", "(UP)"),
 
     /* Obscuration Codes */
-    FG("Fog"),
-    VA("Volcanic Ash"),
-    BR("Mist"),
-    HZ("Haze"),
-    DU("Widespread Dust"),
-    FU("Smoke"),
-    SA("Sand"),
-    PY("Spray"),
+    FG("Fog", "(FG)"),
+    VA("Volcanic Ash", "(VA)"),
+    BR("Mist", "(BR)"),
+    HZ("Haze", "(HZ)"),
+    DU("Widespread Dust", "(DU)"),
+    FU("Smoke", "(FU)"),
+    SA("Sand", "(SA)"),
+    PY("Spray", "(PY)"),
 
     /* Other codes */
-    SQ("Squalls"),
-    PO("Sand Whirls"),
-    DS("Duststorm"),
-    SS("Sandstorm"),
-    FC("Funnel Clouds"),
+    SQ("Squalls", "(SQ)"),
+    PO("Sand Whirls", "(PO)"),
+    DS("Duststorm", "(DS)"),
+    SS("Sandstorm", "(SS)"),
+    FC("Funnel Clouds", "(FC)"),
 
     /* Descriptors */
-    MI("Shallow"),
-    PR("Partial"),
-    BC("Patches of"),
-    DR("Low Drifting"),
-    BL("Blowing"),
-    SH("Showers"),
-    FZ("Freezing"),
-    RE("Recent"),
-    VC("In the vicinity"),
+    MI("Shallow", "(MI)"),
+    PR("Partial", "(PR)"),
+    BC("Patches of", "(BC)"),
+    DR("Low Drifting", "(DR)"),
+    BL("Blowing", "(BL)"),
+    SH("Showers", "(SH)"),
+    FZ("Freezing", "(FZ)"),
+    RE("Recent", "(RE)"),
+    VC("In the vicinity", "(VC)"),
 
     /* Intensity */
-    LIGHT("Light"),
-    MOD("Moderate"),
-    HEAVY("Heavy");
+    LIGHT("Light", "^(-)"),
+    MOD("Moderate", "^()"),
+    HEAVY("Heavy", "^(\\+)");
 
 
     private final String decode;
+    private final String regExp;
 
-    private WxCodes(String s){
+    WxCodes(String s, String r) {
         decode = s;
+        regExp = r;
     }
 
-    String getDecodedValue(){
+    public String getDecoded() {
         return this.decode;
     }
 
-
+    public String getRegExp() {
+        return this.regExp;
+    }
 }

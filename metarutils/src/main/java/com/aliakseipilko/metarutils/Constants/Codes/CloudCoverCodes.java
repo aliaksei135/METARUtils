@@ -5,14 +5,14 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 public enum CloudCoverCodes implements BaseMetarCode {
 
-    SKC,
-    CLR,
-    NSC,
-    FEW,
-    SCT,
-    BKN,
-    OVC,
-    VV;
+    SKC("Sky Clear", "^(SKC)$"),
+    CLR("Sky Clear", "^(CLR)$"),
+    NSC("No Significant Cloud", "^(NSC)$"),
+    FEW("Few Clouds", "^(FEW)"),
+    SCT("Scattered Clouds", "^(SCT)"),
+    BKN("Broken Clouds", "^(BKN)"),
+    OVC("Overcast Clouds", "^(OVC)"),
+    VV("Vertical Visibility", "^(VV)");
 
     private final String decode;
     private final String regExp;
