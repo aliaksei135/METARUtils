@@ -1,13 +1,18 @@
 package com.aliakseipilko.metarutils.Constants;
 
 
+import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
+import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
+import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
+import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
+
 public enum MetarBlock implements BaseMetarCode {
 
     /* With the help of http://www.skybrary.aero/index.php/Meteorological_Terminal_Air_Report_(METAR) and http://weatherfaqs.org.uk/node/197 */
 
-    CODE("Indicator", "(METAR|SPECI|TREND)"),
-    LOC_ID("Station ID", "(^[A-Za-z]{4}$)"),
-    DATETIME("Date Time", "(^[0-9]{6}[A-Z]{1}$)"),
+    CODE("Indicator", "(METAR|SPECI|TREND)", CodeNameDecoder.class),
+    LOC_ID("Station ID", "(^[A-Za-z]{4}$)", LocationIdDecoder.class),
+    DATETIME("Date Time", "(^[0-9]{6}[A-Z]{1}$)", DateTimeDecoder.class),
     STATUS("Observation Status", "(AUTO)"),
     SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))(KT|KPH|MPS))$)"),
     SFC_WIND_VAR("Surface Wind Direction Variance", "(^([0-9]{3})V([0-9]{3})$)"),
@@ -28,10 +33,12 @@ public enum MetarBlock implements BaseMetarCode {
 
     private final String decode;
     private final String regExp;
+    private final Class<? extends BaseBlockDecoder> decoder;
 
-    MetarBlock(String s, String r) {
+    MetarBlock(String s, String r, Class<? extends BaseBlockDecoder> d) {
         decode = s;
         regExp = r;
+        decoder = d;
     }
 
     public String getDecoded() {
@@ -40,5 +47,9 @@ public enum MetarBlock implements BaseMetarCode {
 
     public String getRegExp(){
         return this.regExp;
+    }
+
+    public Class<? extends BaseBlockDecoder> getDecodingClass() {
+        return this.decoder;
     }
 }
