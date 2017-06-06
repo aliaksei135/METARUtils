@@ -5,6 +5,7 @@ import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
 import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
 import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
 import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
+import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 
 public enum MetarBlock implements BaseMetarCode {
 
@@ -13,7 +14,7 @@ public enum MetarBlock implements BaseMetarCode {
     CODE("Indicator", "(METAR|SPECI|TREND)", CodeNameDecoder.class),
     LOC_ID("Station ID", "(^[A-Za-z]{4}$)", LocationIdDecoder.class),
     DATETIME("Date Time", "(^[0-9]{6}[A-Z]{1}$)", DateTimeDecoder.class),
-    STATUS("Observation Status", "(AUTO)"),
+    STATUS("Observation Status", "(AUTO)", StatusDecoder.class),
     SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))(KT|KPH|MPS))$)"),
     SFC_WIND_VAR("Surface Wind Direction Variance", "(^([0-9]{3})V([0-9]{3})$)"),
     VIS("Visibility", "(^(([0-9]{4})|(([0-9])\\/?([0-9])?(SM)))((N|NE|E|SE|S|SW|W|NW)?)$)"),

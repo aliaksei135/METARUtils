@@ -1,7 +1,9 @@
 package com.aliakseipilko.metarutils.Constants.Units;
 
 
-public enum WindUnits {
+import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
+
+public enum WindUnits implements BaseMetarCode {
 
     KT("Knots"),
     KPH("Kilometres per Hour"),
@@ -9,11 +11,18 @@ public enum WindUnits {
 
     private final String decode;
 
-    private WindUnits(String s){
+    WindUnits(String s) {
         decode = s;
     }
 
-    String getDecoded(){
+    public String getDecoded() {
         return this.decode;
     }
+
+    @Override
+    public String getRegExp() {
+        return null;
+    }
+
+
 }
