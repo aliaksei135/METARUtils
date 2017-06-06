@@ -6,6 +6,7 @@ import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
 import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
 import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
+import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 
 public enum MetarBlock implements BaseMetarCode {
 
@@ -15,8 +16,8 @@ public enum MetarBlock implements BaseMetarCode {
     LOC_ID("Station ID", "(^[A-Za-z]{4}$)", LocationIdDecoder.class),
     DATETIME("Date Time", "(^[0-9]{6}[A-Z]{1}$)", DateTimeDecoder.class),
     STATUS("Observation Status", "(AUTO)", StatusDecoder.class),
-    SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))(KT|KPH|MPS))$)"),
-    SFC_WIND_VAR("Surface Wind Direction Variance", "(^([0-9]{3})V([0-9]{3})$)"),
+    SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))(KT|KPH|MPS))$)", SurfaceWindDecoder.class),
+    SFC_WIND_VAR("Surface Wind Direction Variance", "(^([0-9]{3})V([0-9]{3})$)", SurfaceWindDecoder.class),
     VIS("Visibility", "(^(([0-9]{4})|(([0-9])\\/?([0-9])?(SM)))((N|NE|E|SE|S|SW|W|NW)?)$)"),
     RVR("Runway Visual Range", "(^(R([0-9]([0-9])?(L|C|R)?)\\/((P|M)([0-9]{4})(U|D|N)?))$)"),
     WX("Weather", "(^(NSW)|((-|\\+)?(MI|PR|BC|DR|BL|SH|FZ|RE|VC)?(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)?)$)"),

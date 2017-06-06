@@ -2,8 +2,9 @@ package com.aliakseipilko.metarutils.Decoders;
 
 
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
-import com.aliakseipilko.metarutils.Constants.Codes.DateTimeCodes;
+import com.aliakseipilko.metarutils.Constants.Codes.SurfaceWindCodes;
 import com.aliakseipilko.metarutils.Constants.Codes.UnknownCodes;
+import com.aliakseipilko.metarutils.Constants.Units.WindUnits;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
 import java.util.HashMap;
@@ -17,14 +18,41 @@ public class SurfaceWindDecoder implements BaseBlockDecoder {
         Map<String, BaseMetarCode> result = new HashMap<>();
 
         //Only one of each of these codes in date time block
-        for (DateTimeCodes code : DateTimeCodes.values()) {
+        outer:
+        for (SurfaceWindCodes code : SurfaceWindCodes.values()) {
             // Get the pattern and matcher for this code type
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
+                if (code == SurfaceWindCodes.UNITS) {
+                    // Get the matching substring
+                    String b = block.substring(m.start(), m.end());
+                    // Iterate over wind units
+                    for (WindUnits unit : WindUnits.values()) {
+                        Matcher ma = Pattern.compile(unit.getRegExp()).matcher(b);
+                        if (ma.find()) {
+                            // Append units
+                            String d = unit.getDecoded();
+                            // Add onto result map
+                            result.put(d, code);
+                            // Consume matched substring
+                            block = block.replace(b, "");
+                            // Break from *inner* loop and continue *outer* loop
+                            continue outer;
+                        }
+                    }
+                }
                 // Get the matching substring
                 String b = block.substring(m.start(), m.end());
-                // Append matching substring to code type name
-                String d = code.getDecoded() + ": " + b;
+                if (code == SurfaceWindCodes.VRB) {
+                    String d = code.getDecoded();
+                } else if (code == SurfaceWindCodes.V) {
+                    String d = code.getDecoded() + b.replace("V", " to ");
+                } else if (code == SurfaceWindCodes.G) {
+                    String d = code.getDecoded() + b.replace("G", " ");
+                } else {
+                    // Append matching substring to code type name
+                    String d = code.getDecoded() + ": " + b;
+                }
                 // Add onto result map
                 result.put(d, code);
                 // Consume matched substring

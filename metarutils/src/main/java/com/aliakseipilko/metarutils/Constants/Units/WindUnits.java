@@ -5,14 +5,17 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 public enum WindUnits implements BaseMetarCode {
 
-    KT("Knots"),
-    KPH("Kilometres per Hour"),
-    MPS("Metres per Second");
+    KT("Knots", "(KT)$"),
+    // Never seen this used but apparently its a thing ¯\_(ツ)_/¯
+    KPH("Kilometres per Hour", "(KPH)$"),
+    MPS("Metres per Second", "(MPS)$");
 
     private final String decode;
+    private final String regExp;
 
-    WindUnits(String s) {
+    WindUnits(String s, String r) {
         decode = s;
+        regExp = r;
     }
 
     public String getDecoded() {
@@ -21,7 +24,7 @@ public enum WindUnits implements BaseMetarCode {
 
     @Override
     public String getRegExp() {
-        return null;
+        return this.regExp;
     }
 
 
