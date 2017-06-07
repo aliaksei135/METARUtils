@@ -1,20 +1,27 @@
 package com.aliakseipilko.metarutils.Constants.Units;
 
-
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
-public enum VisibilityUnits implements BaseMetarCode {
-    M("Metres", "^([0-9]{4})"),
-    SM("Statute Miles", "^(([0-9])\\/?([0-9])?(SM))");
+
+public enum CardinalDirections implements BaseMetarCode {
+    N("North", "N"),
+    NE("North East", "NE"),
+    E("East", "E"),
+    SE("South East", "SE"),
+    S("South", "S"),
+    SW("South West", "SW"),
+    W("West", "W"),
+    NW("North West", "NW");
 
     private final String decode;
     private final String regExp;
 
-    VisibilityUnits(String s, String r) {
+    CardinalDirections(String s, String r) {
         decode = s;
         regExp = r;
     }
 
+    @Override
     public String getDecoded() {
         return this.decode;
     }
@@ -23,6 +30,4 @@ public enum VisibilityUnits implements BaseMetarCode {
     public String getRegExp() {
         return this.regExp;
     }
-
-
 }
