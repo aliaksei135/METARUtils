@@ -43,15 +43,16 @@ public class SurfaceWindDecoder implements BaseBlockDecoder {
                 }
                 // Get the matching substring
                 String b = block.substring(m.start(), m.end());
+                String d;
                 if (code == SurfaceWindCodes.VRB) {
-                    String d = code.getDecoded();
+                    d = code.getDecoded();
                 } else if (code == SurfaceWindCodes.V) {
-                    String d = code.getDecoded() + b.replace("V", " to ");
+                    d = code.getDecoded() + b.replace("V", " to ");
                 } else if (code == SurfaceWindCodes.G) {
-                    String d = code.getDecoded() + b.replace("G", " ");
+                    d = code.getDecoded() + b.replace("G", " ");
                 } else {
                     // Append matching substring to code type name
-                    String d = code.getDecoded() + ": " + b;
+                    d = code.getDecoded() + ": " + b;
                 }
                 // Add onto result map
                 result.put(d, code);
