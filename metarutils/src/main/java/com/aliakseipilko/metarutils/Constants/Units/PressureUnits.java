@@ -4,8 +4,8 @@ package com.aliakseipilko.metarutils.Constants.Units;
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 public enum PressureUnits implements BaseMetarCode {
-    HPA("HectoPascals", "^(Q([0-9]{4}))"),
-    INHG("Inches of Mercury", "^(A([0-9]{4}))");
+    HPA("HectoPascals", "^(Q(?=([0-9]{4})))"),
+    INHG("Inches of Mercury", "^(A(?=([0-9]{4})))");
 
     private final String decode;
     private final String regExp;
