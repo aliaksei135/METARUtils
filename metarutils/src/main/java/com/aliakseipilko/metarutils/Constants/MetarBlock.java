@@ -8,6 +8,7 @@ import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
 import com.aliakseipilko.metarutils.Decoders.PressureDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
+import com.aliakseipilko.metarutils.Decoders.UnknownDecoder;
 import com.aliakseipilko.metarutils.Decoders.VisibilityDecoder;
 
 public enum MetarBlock implements BaseMetarCode {
@@ -33,7 +34,7 @@ public enum MetarBlock implements BaseMetarCode {
     RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)"),
     TREND("Trends", "(^((BECMG|TEMPO))$)"),
     RMK("Remarks", "(^(RMK)$)"),
-    UNK("Unknown METAR Block", "(^$)");
+    UNK("Unknown METAR Block", "(^$)", UnknownDecoder.class);
 
     private final String decode;
     private final String regExp;
