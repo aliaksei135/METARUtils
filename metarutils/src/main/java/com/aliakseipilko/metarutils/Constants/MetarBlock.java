@@ -6,6 +6,7 @@ import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
 import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
 import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
 import com.aliakseipilko.metarutils.Decoders.PressureDecoder;
+import com.aliakseipilko.metarutils.Decoders.RVRDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 import com.aliakseipilko.metarutils.Decoders.UnknownDecoder;
@@ -22,7 +23,7 @@ public enum MetarBlock implements BaseMetarCode {
     SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))(KT|KPH|MPS))$)", SurfaceWindDecoder.class),
     SFC_WIND_VAR("Surface Wind Direction Variance", "(^([0-9]{3})V([0-9]{3})$)", SurfaceWindDecoder.class),
     VIS("Visibility", "(^(([0-9]{4})|(([0-9])\\/?([0-9])?(SM)))((N|NE|E|SE|S|SW|W|NW)?)$)", VisibilityDecoder.class),
-    RVR("Runway Visual Range", "(^(R([0-9]([0-9])?(L|C|R)?)\\/((P|M)([0-9]{4})(U|D|N)?))$)"),
+    RVR("Runway Visual Range", "(^(R([0-9]([0-9])?(L|C|R)?)\\/((P|M)([0-9]{4})(U|D|N)?))$)", RVRDecoder.class),
     WX("Weather", "(^(NSW)|((-|\\+)?(MI|PR|BC|DR|BL|SH|FZ|RE|VC)?(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)?)$)"),
     CLOUD("Cloud Cover", "(^((NSC|CLR|SKC)|((FEW|SCT|BKN|OVC)([0-9]{3})))$)"),
     VV("Vertical Visibility", "(^((VV)((\\/\\/\\/)|([0-9]{3})))$)"),
