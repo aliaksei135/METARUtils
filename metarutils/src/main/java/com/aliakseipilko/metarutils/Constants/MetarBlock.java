@@ -12,6 +12,7 @@ import com.aliakseipilko.metarutils.Decoders.RVRDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 import com.aliakseipilko.metarutils.Decoders.UnknownDecoder;
+import com.aliakseipilko.metarutils.Decoders.VerticalVisibilityDecoder;
 import com.aliakseipilko.metarutils.Decoders.VisibilityDecoder;
 import com.aliakseipilko.metarutils.Decoders.WxDecoder;
 
@@ -29,7 +30,7 @@ public enum MetarBlock implements BaseMetarCode {
     RVR("Runway Visual Range", "(^(R([0-9]([0-9])?(L|C|R)?)\\/((P|M)([0-9]{4})(U|D|N)?))$)", RVRDecoder.class),
     WX("Weather", "(^(NSW)|((-|\\+)?(MI|PR|BC|DR|BL|SH|FZ|RE|VC)?(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)?)$)", WxDecoder.class),
     CLOUD("Cloud Cover", "(^((NSC|CLR|SKC)|((FEW|SCT|BKN|OVC)([0-9]{3})))$)", CloudCoverDecoder.class),
-    VV("Vertical Visibility", "(^((VV)((\\/\\/\\/)|([0-9]{3})))$)"),
+    VV("Vertical Visibility", "(^((VV)((\\/\\/\\/)|([0-9]{3})))$)", VerticalVisibilityDecoder.class),
     CAVOK("Ceiling and Visibility Ok", "(^(CAVOK)$)", CAVOKDecoder.class),
     TEMP("Tempertaure and Dewpoint", "(^((M)?([0-9]{2})\\/(M)?([0-9]{2}))$)"),
     PRESS("Atmospheric pressure", "(^((A|Q|M)([0-9]{4}))$)", PressureDecoder.class),
