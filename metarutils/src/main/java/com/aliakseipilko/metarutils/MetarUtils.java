@@ -45,6 +45,7 @@ public class MetarUtils {
         Map<String, MetarBlock> blockMap = new HashMap<>();
         boolean isAfterRMK = false;
         boolean isAfterTrend = false;
+        boolean isAfterWS = false;
 
         // Assign blocks to METAR
         for (String token: tokens) {
@@ -55,6 +56,22 @@ public class MetarUtils {
 
             // Assign block identifiers to each token first
             for(MetarBlock block : MetarBlock.values()){
+                // Check for new section
+                if (token.matches(MetarBlock.RMK.getRegExp())) {
+                    isAfterRMK = true;
+                    isAfterTrend = false;
+                    isAfterWS = false;
+                }
+                if (token.matches(MetarBlock.TREND.getRegExp())) {
+                    isAfterTrend = true;
+                    isAfterRMK = false;
+                    isAfterWS = false;
+                }
+                if (token.matches(MetarBlock.WS.getRegExp())) {
+                    isAfterWS = true;
+                    isAfterRMK = false;
+                    isAfterTrend = false;
+                }
                 // Check if after RMK block, if so then must be a remark
                 if(isAfterRMK){
                     blockMap.put(token, MetarBlock.RMK);
@@ -65,6 +82,11 @@ public class MetarUtils {
                     blockMap.put(token, MetarBlock.TREND);
                     continue;
                 }
+                // Check if after WS block, if so then must be windshear rwys
+                if (isAfterWS) {
+                    blockMap.put(token, MetarBlock.WS);
+                    continue;
+                }
                 if(token.matches(block.getRegExp())){
                     // Store block type in synced array
                     blockMap.put(token, block);
@@ -72,9 +94,18 @@ public class MetarUtils {
                     // Check if Remarks or Trend sections started, if so trigger bool switch
                     if(block == MetarBlock.RMK){
                         isAfterRMK = true;
+                        isAfterTrend = false;
+                        isAfterWS = false;
                     }
                     if(block == MetarBlock.TREND){
                         isAfterTrend = true;
+                        isAfterRMK = false;
+                        isAfterWS = false;
+                    }
+                    if (block == MetarBlock.WS) {
+                        isAfterWS = true;
+                        isAfterRMK = false;
+                        isAfterTrend = false;
                     }
                 }
             }
