@@ -2,6 +2,7 @@ package com.aliakseipilko.metarutils.Constants;
 
 
 import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
+import com.aliakseipilko.metarutils.Decoders.CAVOKDecoder;
 import com.aliakseipilko.metarutils.Decoders.CloudCoverDecoder;
 import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
 import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
@@ -29,7 +30,7 @@ public enum MetarBlock implements BaseMetarCode {
     WX("Weather", "(^(NSW)|((-|\\+)?(MI|PR|BC|DR|BL|SH|FZ|RE|VC)?(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)(DZ|RA|SN|IC|GR|SG|PL|GS|UP|FG|VA|BR|HZ|DU|FU|SA|PY|SQ|PO|DS|SS|FC)?)$)", WxDecoder.class),
     CLOUD("Cloud Cover", "(^((NSC|CLR|SKC)|((FEW|SCT|BKN|OVC)([0-9]{3})))$)", CloudCoverDecoder.class),
     VV("Vertical Visibility", "(^((VV)((\\/\\/\\/)|([0-9]{3})))$)"),
-    CAVOK("Ceiling and Visibility Ok", "(^(CAVOK)$)"),
+    CAVOK("Ceiling and Visibility Ok", "(^(CAVOK)$)", CAVOKDecoder.class),
     TEMP("Tempertaure and Dewpoint", "(^((M)?([0-9]{2})\\/(M)?([0-9]{2}))$)"),
     PRESS("Atmospheric pressure", "(^((A|Q|M)([0-9]{4}))$)", PressureDecoder.class),
     WS("Windshear", "(^(WS)$)"),
