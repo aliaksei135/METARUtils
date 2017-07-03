@@ -7,6 +7,7 @@ import com.aliakseipilko.metarutils.Decoders.CloudCoverDecoder;
 import com.aliakseipilko.metarutils.Decoders.CodeNameDecoder;
 import com.aliakseipilko.metarutils.Decoders.DateTimeDecoder;
 import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
+import com.aliakseipilko.metarutils.Decoders.MilitaryColourDecoder;
 import com.aliakseipilko.metarutils.Decoders.PressureDecoder;
 import com.aliakseipilko.metarutils.Decoders.RVRDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
@@ -33,10 +34,10 @@ public enum MetarBlock implements BaseMetarCode {
     CLOUD("Cloud Cover", "(^((NSC|CLR|SKC)|((FEW|SCT|BKN|OVC)([0-9]{3})))$)", CloudCoverDecoder.class),
     VV("Vertical Visibility", "(^((VV)((\\/\\/\\/)|([0-9]{3})))$)", VerticalVisibilityDecoder.class),
     CAVOK("Ceiling and Visibility Ok", "(^(CAVOK)$)", CAVOKDecoder.class),
-    TEMP("Tempertaure and Dewpoint", "(^((M)?([0-9]{2})\\/(M)?([0-9]{2}))$)"),
+    TEMP("Temperature and Dewpoint", "(^((M)?([0-9]{2})\\/(M)?([0-9]{2}))$)"),
     PRESS("Atmospheric pressure", "(^((A|Q|M)([0-9]{4}))$)", PressureDecoder.class),
     WS("Windshear", "(^(WS)$)", WindShearDecoder.class),
-    MIL_CLR("Military Colour Code", "(^((BLACK)?(BLU|WHT|GRN|YLO1|YLO2|AMB|RED))$)"),
+    MIL_CLR("Military Colour Code", "(^((BLACK)?(BLU|WHT|GRN|YLO1|YLO2|AMB|RED))$)", MilitaryColourDecoder.class),
     RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)"),
     TREND("Trends", "(^((BECMG|TEMPO))$)"),
     RMK("Remarks", "(^(RMK)$)"),
