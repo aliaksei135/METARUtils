@@ -3,6 +3,7 @@ package com.aliakseipilko.metarutils.Decoders;
 
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 import com.aliakseipilko.metarutils.Constants.Codes.TemperatureDewpointCodes;
+import com.aliakseipilko.metarutils.Constants.Codes.UnknownCodes;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class TemperatureDewpointDecoder implements BaseBlockDecoder {
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
                 String b = block.substring(m.start(), m.end());
+                block = block.replace(b, "");
                 boolean isNegative = false;
                 if (b.matches("(M(?=([0-9]{2})))")) {
                     isNegative = true;
@@ -32,6 +34,12 @@ public class TemperatureDewpointDecoder implements BaseBlockDecoder {
                 }
                 result.put(d, code);
             }
+        }
+
+        // Add any uncomsumed text to map as unknown code
+        // Account for middle "/" between temp and dew
+        if (!(block.trim().length() <= 1)) {
+            result.put(block, UnknownCodes.UKNWN);
         }
 
         return result;
