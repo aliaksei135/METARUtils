@@ -9,7 +9,8 @@ public enum SurfaceWindCodes implements BaseMetarCode {
     V("Varying direction", "^([0-3][0-9]0)V([0-3][0-9]0)$"),
     DIRECTION("Wind bearing", "([0-3][0-9]0)(?=([0-9]{2}))"),
     SPEED("Wind speed", "(?<=([0-3][0-9]0))([0-9]{2})"),
-    UNITS("", "(KT|MPS|KPH)$");
+    UNITS("", "(KT|MPS|KPH)$"),
+    WS("WindShear", "^(WS)$");
 
     private final String decode;
     private final String regExp;

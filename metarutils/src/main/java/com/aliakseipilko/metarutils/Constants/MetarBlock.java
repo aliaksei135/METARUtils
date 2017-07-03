@@ -14,6 +14,7 @@ import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 import com.aliakseipilko.metarutils.Decoders.UnknownDecoder;
 import com.aliakseipilko.metarutils.Decoders.VerticalVisibilityDecoder;
 import com.aliakseipilko.metarutils.Decoders.VisibilityDecoder;
+import com.aliakseipilko.metarutils.Decoders.WindShearDecoder;
 import com.aliakseipilko.metarutils.Decoders.WxDecoder;
 
 public enum MetarBlock implements BaseMetarCode {
@@ -34,7 +35,7 @@ public enum MetarBlock implements BaseMetarCode {
     CAVOK("Ceiling and Visibility Ok", "(^(CAVOK)$)", CAVOKDecoder.class),
     TEMP("Tempertaure and Dewpoint", "(^((M)?([0-9]{2})\\/(M)?([0-9]{2}))$)"),
     PRESS("Atmospheric pressure", "(^((A|Q|M)([0-9]{4}))$)", PressureDecoder.class),
-    WS("Windshear", "(^(WS)$)"),
+    WS("Windshear", "(^(WS)$)", WindShearDecoder.class),
     MIL_CLR("Military Colour Code", "(^((BLACK)?(BLU|WHT|GRN|YLO1|YLO2|AMB|RED))$)"),
     RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)"),
     TREND("Trends", "(^((BECMG|TEMPO))$)"),
