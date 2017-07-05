@@ -23,23 +23,23 @@ public enum RunwayStateCodes implements BaseMetarCode {
     RWY_DEPST_UNKWN("Deposit type unknown", "(\\/)(?=(((1|2|5|9)|(\\/))(([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/))))"),
 
     //Deposit Extent
-    RWY_DEPST_EXT_10("Contamination 10% or less", "(1)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_EXT_25("Contamination 11% to 25%", "(2)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_EXT_50("Contamination 25% to 50%", "(5)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_EXT_100("Contamination 51% to 100%", "(9)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_EXT_10("Contamination: 10% or less", "(1)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_EXT_25("Contamination: 11% to 25%", "(2)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_EXT_50("Contamination: 25% to 50%", "(5)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_EXT_100("Contamination: 51% to 100%", "(9)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
     RWY_DEPST_EXT_UNKWN("Contamination extent not reported", "(\\/)(?=((([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/)))$)"),
 
     //Deposit Depth
-    RWY_DEPST_DTH("Deposit Depth (mm)", "([0-8][0-9])(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_90MM("Deposit Depth 90mm", "(90)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH("Deposit Depth", "([0-8][0-9])(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_90MM("Deposit Depth: 90mm", "(90)(?=((([0-9]{2})|(\\/\\/)))$)"),
     //91 is not used
-    RWY_DEPST_DTH_10CM("Deposit Depth 10cm", "(92)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_15CM("Deposit Depth 15cm", "(93)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_20CM("Deposit Depth 20cm", "(94)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_25CM("Deposit Depth 25cm", "(95)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_30CM("Deposit Depth 30cm", "(96)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_35CM("Deposit Depth 35cm", "(97)(?=((([0-9]{2})|(\\/\\/)))$)"),
-    RWY_DEPST_DTH_40CM("Deposit Depth 40cm or more", "(98)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_10CM("Deposit Depth: 10cm", "(92)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_15CM("Deposit Depth: 15cm", "(93)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_20CM("Deposit Depth: 20cm", "(94)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_25CM("Deposit Depth: 25cm", "(95)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_30CM("Deposit Depth: 30cm", "(96)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_35CM("Deposit Depth: 35cm", "(97)(?=((([0-9]{2})|(\\/\\/)))$)"),
+    RWY_DEPST_DTH_40CM("Deposit Depth: 40cm or more", "(98)(?=((([0-9]{2})|(\\/\\/)))$)"),
     RWY_DEPST_DTH_UNREL("Runway Non-operational due Deposits", "(99)(?=((([0-9]{2})|(\\/\\/)))$)"),
     RWY_DEPST_DTH_UNKWN("Deposit Depth Not significant", "(\\/\\/)(?=((([0-9]{2})|(\\/\\/)))$)"),
 

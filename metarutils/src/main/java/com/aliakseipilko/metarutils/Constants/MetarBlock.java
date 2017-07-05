@@ -10,6 +10,7 @@ import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
 import com.aliakseipilko.metarutils.Decoders.MilitaryColourDecoder;
 import com.aliakseipilko.metarutils.Decoders.PressureDecoder;
 import com.aliakseipilko.metarutils.Decoders.RVRDecoder;
+import com.aliakseipilko.metarutils.Decoders.RunwayStateDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 import com.aliakseipilko.metarutils.Decoders.TemperatureDewpointDecoder;
@@ -39,7 +40,7 @@ public enum MetarBlock implements BaseMetarCode {
     PRESS("Atmospheric pressure", "(^((A|Q|M)([0-9]{4}))$)", PressureDecoder.class),
     WS("Windshear", "(^(WS)$)", WindShearDecoder.class),
     MIL_CLR("Military Colour Code", "(^((BLACK)?(BLU|WHT|GRN|YLO1|YLO2|AMB|RED))$)", MilitaryColourDecoder.class),
-    RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)"),
+    RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)", RunwayStateDecoder.class),
     TREND("Trends", "(^((BECMG|TEMPO))$)"),
     RMK("Remarks", "(^(RMK)$)"),
     UNK("Unknown METAR Block", "(^$)", UnknownDecoder.class);
