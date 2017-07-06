@@ -10,10 +10,12 @@ import com.aliakseipilko.metarutils.Decoders.LocationIdDecoder;
 import com.aliakseipilko.metarutils.Decoders.MilitaryColourDecoder;
 import com.aliakseipilko.metarutils.Decoders.PressureDecoder;
 import com.aliakseipilko.metarutils.Decoders.RVRDecoder;
+import com.aliakseipilko.metarutils.Decoders.RemarkDecoder;
 import com.aliakseipilko.metarutils.Decoders.RunwayStateDecoder;
 import com.aliakseipilko.metarutils.Decoders.StatusDecoder;
 import com.aliakseipilko.metarutils.Decoders.SurfaceWindDecoder;
 import com.aliakseipilko.metarutils.Decoders.TemperatureDewpointDecoder;
+import com.aliakseipilko.metarutils.Decoders.TrendDecoder;
 import com.aliakseipilko.metarutils.Decoders.UnknownDecoder;
 import com.aliakseipilko.metarutils.Decoders.VerticalVisibilityDecoder;
 import com.aliakseipilko.metarutils.Decoders.VisibilityDecoder;
@@ -41,8 +43,8 @@ public enum MetarBlock implements BaseMetarCode {
     WS("Windshear", "(^(WS)$)", WindShearDecoder.class),
     MIL_CLR("Military Colour Code", "(^((BLACK)?(BLU|WHT|GRN|YLO1|YLO2|AMB|RED))$)", MilitaryColourDecoder.class),
     RSG("Runway State Group", "(^((([0-8][0-9])|99)((CLRD)|([0-9]{4}))([0-9]{2}))$)", RunwayStateDecoder.class),
-    TREND("Trends", "(^((BECMG|TEMPO))$)"),
-    RMK("Remarks", "(^(RMK)$)"),
+    TREND("Trends", "(^((BECMG|TEMPO))$)", TrendDecoder.class),
+    RMK("Remarks", "(^(RMK)$)", RemarkDecoder.class),
     UNK("Unknown METAR Block", "(^$)", UnknownDecoder.class);
 
     private final String decode;
