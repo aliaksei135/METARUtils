@@ -3,6 +3,7 @@ package com.aliakseipilko.metarutils;
 
 import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 import com.aliakseipilko.metarutils.Constants.MetarBlock;
+import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,13 +11,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static com.aliakseipilko.metarutils.Constants.MetarBlock.TREND;
+
 public class MetarUtils {
 
     public MetarUtils() {
 
     }
 
-    public String decodeMetarToString(String metar) throws MetarDecodeException {
+    public String decodeMetarToString(String metar) throws MetarDecodeException, InstantiationException, IllegalAccessException {
+
         Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = decodeMetarToMap(metar);
         Iterator<Map.Entry<MetarBlock, Map<String, ? extends BaseMetarCode>>> blockIter = decodedMap.entrySet().iterator();
         String decodedMetar = "";
@@ -38,19 +42,36 @@ public class MetarUtils {
         return decodedMetar;
     }
 
-    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException {
+    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException, IllegalAccessException, InstantiationException {
         // Tokenise string
         List<String> tokens = Arrays.asList(metar.split(" "));
 
         Map<String, MetarBlock> blockMap = new HashMap<>();
         boolean isAfterRMK = false;
+        String RMKString = null;
+
         boolean isAfterTrend = false;
+        String TRENDString = null;
+
         boolean isAfterWS = false;
+        String WSString = null;
 
         // Assign blocks to METAR
         for (String token: tokens) {
             // Check for METAR end character
             if(token.equals("=")){
+                if (RMKString != null) {
+                    blockMap.put(RMKString, MetarBlock.RMK);
+                    RMKString = null;
+                }
+                if (TRENDString != null) {
+                    blockMap.put(TRENDString, MetarBlock.TREND);
+                    TRENDString = null;
+                }
+                if (WSString != null) {
+                    blockMap.put(WSString, MetarBlock.WS);
+                    WSString = null;
+                }
                 break;
             }
 
@@ -61,30 +82,76 @@ public class MetarUtils {
                     isAfterRMK = true;
                     isAfterTrend = false;
                     isAfterWS = false;
+                    if (RMKString != null) {
+                        blockMap.put(RMKString, MetarBlock.RMK);
+                        RMKString = null;
+                    }
+                    if (TRENDString != null) {
+                        blockMap.put(TRENDString, MetarBlock.TREND);
+                        TRENDString = null;
+                    }
+                    if (WSString != null) {
+                        blockMap.put(WSString, MetarBlock.WS);
+                        WSString = null;
+                    }
                 }
-                if (token.matches(MetarBlock.TREND.getRegExp())) {
+                if (token.matches(TREND.getRegExp())) {
                     isAfterTrend = true;
                     isAfterRMK = false;
                     isAfterWS = false;
+                    if (RMKString != null) {
+                        blockMap.put(RMKString, MetarBlock.RMK);
+                        RMKString = null;
+                    }
+                    if (TRENDString != null) {
+                        blockMap.put(TRENDString, MetarBlock.TREND);
+                        TRENDString = null;
+                    }
+                    if (WSString != null) {
+                        blockMap.put(WSString, MetarBlock.WS);
+                        WSString = null;
+                    }
+
                 }
                 if (token.matches(MetarBlock.WS.getRegExp())) {
                     isAfterWS = true;
                     isAfterRMK = false;
                     isAfterTrend = false;
+                    if (RMKString != null) {
+                        blockMap.put(RMKString, MetarBlock.RMK);
+                        RMKString = null;
+                    }
+                    if (TRENDString != null) {
+                        blockMap.put(TRENDString, MetarBlock.TREND);
+                        TRENDString = null;
+                    }
+                    if (WSString != null) {
+                        blockMap.put(WSString, MetarBlock.WS);
+                        WSString = null;
+                    }
                 }
                 // Check if after RMK block, if so then must be a remark
                 if(isAfterRMK){
-                    blockMap.put(token, MetarBlock.RMK);
+                    if (RMKString == null) {
+                        RMKString = "";
+                    }
+                    RMKString = RMKString + " " + token;
                     continue;
                 }
                 // Check if after TREND block, if so then must be a Trend
                 if(isAfterTrend){
-                    blockMap.put(token, MetarBlock.TREND);
+                    if (TRENDString == null) {
+                        TRENDString = "";
+                    }
+                    TRENDString = TRENDString + " " + token;
                     continue;
                 }
                 // Check if after WS block, if so then must be windshear rwys
                 if (isAfterWS) {
-                    blockMap.put(token, MetarBlock.WS);
+                    if (WSString == null) {
+                        WSString = "";
+                    }
+                    WSString = WSString + " " + token;
                     continue;
                 }
                 if(token.matches(block.getRegExp())){
@@ -97,7 +164,7 @@ public class MetarUtils {
                         isAfterTrend = false;
                         isAfterWS = false;
                     }
-                    if(block == MetarBlock.TREND){
+                    if (block == TREND) {
                         isAfterTrend = true;
                         isAfterRMK = false;
                         isAfterWS = false;
@@ -111,7 +178,33 @@ public class MetarUtils {
             }
         }
 
+        // Add any loose sections on
+        if (RMKString != null) {
+            blockMap.put(RMKString, MetarBlock.RMK);
+            RMKString = null;
+        }
+        if (TRENDString != null) {
+            blockMap.put(TRENDString, MetarBlock.TREND);
+            TRENDString = null;
+        }
+        if (WSString != null) {
+            blockMap.put(WSString, MetarBlock.WS);
+            WSString = null;
+        }
 
+        // NOTE: Key and value have changed places here
+        Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = new HashMap<>();
+
+        for (Map.Entry<String, MetarBlock> entry : blockMap.entrySet()) {
+            //Get the METARBlock for this block
+            MetarBlock block = entry.getValue();
+            //Get the decoder for this block and instantiate it
+            BaseBlockDecoder decoder = block.getDecodingClass().newInstance();
+            //Add the block with the decoded pair from the decoder
+            decodedMap.put(block, decoder.decodeToMap(entry.getKey()));
+        }
+
+        return decodedMap;
     }
 
 }
