@@ -28,8 +28,8 @@ public class WindShearDecoder implements BaseBlockDecoder {
             }
         }
 
-        // Add any uncomsumed text to map as unknown code
-        if (block.length() != 0) {
+        // Add any unconsumed text to map as unknown code
+        if (block.trim().length() != 0) {
             result.put(block, UnknownCodes.UKNWN);
         }
 
