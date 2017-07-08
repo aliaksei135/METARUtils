@@ -57,6 +57,7 @@ public class MetarUtils {
         String WSString = null;
 
         // Assign blocks to METAR
+        tokenLoop:
         for (String token: tokens) {
             // Check for METAR end character
             if(token.equals("=")){
@@ -76,6 +77,7 @@ public class MetarUtils {
             }
 
             // Assign block identifiers to each token first
+            blockLoop:
             for(MetarBlock block : MetarBlock.values()){
                 // Check for new section
                 if (token.matches(MetarBlock.RMK.getRegExp())) {
@@ -136,7 +138,7 @@ public class MetarUtils {
                         RMKString = "";
                     }
                     RMKString = RMKString + " " + token;
-                    continue;
+                    continue blockLoop;
                 }
                 // Check if after TREND block, if so then must be a Trend
                 if(isAfterTrend){
@@ -144,7 +146,7 @@ public class MetarUtils {
                         TRENDString = "";
                     }
                     TRENDString = TRENDString + " " + token;
-                    continue;
+                    continue blockLoop;
                 }
                 // Check if after WS block, if so then must be windshear rwys
                 if (isAfterWS) {
@@ -152,7 +154,7 @@ public class MetarUtils {
                         WSString = "";
                     }
                     WSString = WSString + " " + token;
-                    continue;
+                    continue blockLoop;
                 }
                 if(token.matches(block.getRegExp())){
                     // Store block type in synced array
@@ -174,6 +176,7 @@ public class MetarUtils {
                         isAfterRMK = false;
                         isAfterTrend = false;
                     }
+                    continue tokenLoop;
                 }
             }
         }
