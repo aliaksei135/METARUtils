@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">METAR Utils</string>
+    <string name="app_name">METAR Utils Demo</string>
+    <string name="metar">EGLL 231020Z 02006KT 4000 0900NE R27/0600U R32/0150D PRFG OVC007 12/11 Q1028</string>
 </resources>

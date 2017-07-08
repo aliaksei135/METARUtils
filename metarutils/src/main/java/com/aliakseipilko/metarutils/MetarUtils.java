@@ -29,7 +29,7 @@ public class MetarUtils {
             // Get block level entry
             Map.Entry<MetarBlock, Map<String, ? extends BaseMetarCode>> entry = blockIter.next();
             // Get and append title of block to decoded metar string
-            decodedMetar = decodedMetar.concat(entry.getKey().getDecoded() + ":\n");
+            decodedMetar = decodedMetar.concat(entry.getKey().getDecoded() + ":\n\t\t");
             // Obtain iterator for inner map
             Iterator<? extends Map.Entry<String, ? extends BaseMetarCode>> elementIter = entry.getValue().entrySet().iterator();
             // Iterate over inner elements of block and append them to decoded metar string
