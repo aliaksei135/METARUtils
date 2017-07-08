@@ -22,7 +22,7 @@ public class VisibilityDecoder implements BaseBlockDecoder {
 
             if (m.find()) {
                 String b = block.substring(m.start(), m.end());
-                String d = b + unit.getDecoded();
+                String d = b + " " + unit.getDecoded();
                 result.put(d, unit);
                 block = block.replace(b, "");
                 break;
