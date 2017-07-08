@@ -46,7 +46,7 @@ public enum WxCodes implements BaseMetarCode {
 
     /* Intensity */
     LIGHT("Light", "^(-)"),
-    MOD("Moderate", "^()"),
+    //    MOD("Moderate", "^()"),
     HEAVY("Heavy", "^(\\+)");
 
 
