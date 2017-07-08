@@ -28,9 +28,9 @@ public class TemperatureDewpointDecoder implements BaseBlockDecoder {
                 }
                 String d;
                 if (isNegative) {
-                    d = code.getDecoded() + "-" + b + "°C";
+                    d = code.getDecoded() + ": -" + b + "°C";
                 } else {
-                    d = code.getDecoded() + b + "°C";
+                    d = code.getDecoded() + ": " + b + "°C";
                 }
                 result.put(d, code);
             }
