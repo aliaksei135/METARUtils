@@ -27,7 +27,7 @@ public enum MetarBlock implements BaseMetarCode {
     /* With the help of http://www.skybrary.aero/index.php/Meteorological_Terminal_Air_Report_(METAR) and http://weatherfaqs.org.uk/node/197 */
 
     CODE("Indicator", "(METAR|SPECI|TREND)", CodeNameDecoder.class),
-    LOC_ID("Station ID", "(^[A-Za-z]{4}$)", LocationIdDecoder.class),
+    LOC_ID("Station ID", "(^[A-Za-z]{4}$)?", LocationIdDecoder.class),
     DATETIME("Date Time", "(^[0-9]{6}[A-Z]{1}$)", DateTimeDecoder.class),
     STATUS("Observation Status", "(AUTO)", StatusDecoder.class),
     SFC_WIND("Surface Wind", "(^(((VRB)|([0-9]{3})|(P))([0-9]{2})(G([0-9]{2}))?(KT|KPH|MPS))$)", SurfaceWindDecoder.class),

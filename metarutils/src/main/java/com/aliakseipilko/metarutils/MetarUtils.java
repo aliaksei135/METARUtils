@@ -6,12 +6,12 @@ import com.aliakseipilko.metarutils.Constants.MetarBlock;
 import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.aliakseipilko.metarutils.Constants.MetarBlock.LOC_ID;
 import static com.aliakseipilko.metarutils.Constants.MetarBlock.TREND;
 
 public class MetarUtils {
@@ -47,7 +47,10 @@ public class MetarUtils {
         // Tokenise string
         List<String> tokens = Arrays.asList(metar.split(" "));
 
-        Map<String, MetarBlock> blockMap = new HashMap<>();
+        Map<String, MetarBlock> blockMap = new LinkedHashMap<>();
+
+        boolean containsLocID = false;
+
         boolean isAfterRMK = false;
         String RMKString = null;
 
@@ -80,6 +83,12 @@ public class MetarUtils {
             // Assign block identifiers to each token first
             blockLoop:
             for(MetarBlock block : MetarBlock.values()){
+                //Make sure only one LOC ID is present
+                if (block == LOC_ID) {
+                    if (containsLocID) {
+                        continue blockLoop;
+                    }
+                }
                 // Check for new section
                 if (token.matches(MetarBlock.RMK.getRegExp())) {
                     isAfterRMK = true;
@@ -160,6 +169,10 @@ public class MetarUtils {
                 if(token.matches(block.getRegExp())){
                     // Store block type in synced array
                     blockMap.put(token, block);
+
+                    if (block == LOC_ID) {
+                        containsLocID = true;
+                    }
 
                     // Check if Remarks or Trend sections started, if so trigger bool switch
                     if(block == MetarBlock.RMK){
