@@ -217,8 +217,18 @@ public class MetarUtils {
             MetarBlock block = entry.getValue();
             //Get the decoder for this block and instantiate it
             BaseBlockDecoder decoder = block.getDecodingClass().newInstance();
-            //Add the block with the decoded pair from the decoder
-            decodedMap.put(block, decoder.decodeToMap(entry.getKey()));
+
+            //Ensures keys are unique in map, otherwise this results in rewrites and loss of info
+            if (decodedMap.containsKey(block)) {
+                //TODO This bit is pretty horrible, Redo when it's not 200 degrees outside and i can think straight
+                Map<String, BaseMetarCode> existing = (Map<String, BaseMetarCode>) decodedMap.get(block);
+                Map<String, ? extends BaseMetarCode> additional = decoder.decodeToMap(entry.getKey());
+                Map.Entry<String, ? extends BaseMetarCode> addEntry = additional.entrySet().iterator().next();
+                existing.put(addEntry.getKey(), entry.getValue());
+            } else {
+                //Add the block with the decoded pair from the decoder
+                decodedMap.put(block, decoder.decodeToMap(entry.getKey()));
+            }
         }
 
         return decodedMap;
