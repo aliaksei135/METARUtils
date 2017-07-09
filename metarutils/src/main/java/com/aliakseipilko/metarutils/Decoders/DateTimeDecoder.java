@@ -6,7 +6,7 @@ import com.aliakseipilko.metarutils.Constants.Codes.DateTimeCodes;
 import com.aliakseipilko.metarutils.Constants.Codes.UnknownCodes;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +15,7 @@ public class DateTimeDecoder implements BaseBlockDecoder {
 
     @Override
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
-        Map<String, BaseMetarCode> result = new HashMap<>();
+        Map<String, BaseMetarCode> result = new LinkedHashMap<>();
 
         //Only one of each of these codes in date time block
         for (DateTimeCodes code : DateTimeCodes.values()) {

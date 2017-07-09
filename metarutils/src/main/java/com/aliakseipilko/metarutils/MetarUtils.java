@@ -8,6 +8,7 @@ import com.aliakseipilko.metarutils.Decoders.BaseBlockDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -196,7 +197,7 @@ public class MetarUtils {
         }
 
         // NOTE: Key and value have changed places here
-        Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = new HashMap<>();
+        Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = new LinkedHashMap<>();
 
         for (Map.Entry<String, MetarBlock> entry : blockMap.entrySet()) {
             //Get the METARBlock for this block

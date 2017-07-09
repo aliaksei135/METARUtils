@@ -6,7 +6,7 @@ import com.aliakseipilko.metarutils.Constants.Codes.MilitaryColourCodes;
 import com.aliakseipilko.metarutils.Constants.Codes.UnknownCodes;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ import static com.aliakseipilko.metarutils.Constants.Codes.MilitaryColourCodes.B
 public class MilitaryColourDecoder implements BaseBlockDecoder {
     @Override
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
-        Map<String, BaseMetarCode> result = new HashMap<>();
+        Map<String, BaseMetarCode> result = new LinkedHashMap<>();
 
         boolean isBlack = false;
 

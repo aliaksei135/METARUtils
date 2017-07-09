@@ -5,8 +5,8 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 import com.aliakseipilko.metarutils.Constants.Codes.IdentifierCodes;
 import com.aliakseipilko.metarutils.MetarDecodeException;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CodeNameDecoder implements BaseBlockDecoder {
@@ -24,7 +24,7 @@ public class CodeNameDecoder implements BaseBlockDecoder {
             throw new MetarDecodeException("Bad indicator group");
         }
 
-        Map<String, IdentifierCodes> result = new HashMap<>();
+        Map<String, IdentifierCodes> result = new LinkedHashMap<>();
         result.put(statusCode.getDecoded(), statusCode);
 
         return result;
