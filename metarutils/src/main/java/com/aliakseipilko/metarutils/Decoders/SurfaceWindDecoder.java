@@ -23,33 +23,38 @@ public class SurfaceWindDecoder implements BaseBlockDecoder {
             // Get the pattern and matcher for this code type
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
-                if (code == SurfaceWindCodes.UNITS) {
-                    // Get the matching substring
-                    String b = block.substring(m.start(), m.end());
-                    // Iterate over wind units
-                    for (WindUnits unit : WindUnits.values()) {
-                        Matcher ma = Pattern.compile(unit.getRegExp()).matcher(b);
-                        if (ma.find()) {
-                            // Append units
-                            String d = unit.getDecoded();
-                            // Add onto result map
-                            result.put(d, code);
-                            // Consume matched substring
-                            block = block.replace(b, "");
-                            // Break from *inner* loop and continue *outer* loop
-                            continue outer;
-                        }
-                    }
-                }
+
                 // Get the matching substring
                 String b = block.substring(m.start(), m.end());
-                String d;
+                String d = "";
                 if (code == SurfaceWindCodes.VRB) {
                     d = code.getDecoded();
                 } else if (code == SurfaceWindCodes.V) {
                     d = code.getDecoded() + b.replace("V", " to ");
                 } else if (code == SurfaceWindCodes.G) {
                     d = code.getDecoded() + b.replace("G", " ");
+                } else if (code == SurfaceWindCodes.SPEED) {
+                    // No units will be present if no wind speed is displayed, so this can be nested
+                    Matcher mu = Pattern.compile(SurfaceWindCodes.UNITS.getRegExp()).matcher(block);
+                    if (mu.find()) {
+                        // Get the matching substring
+                        String u = block.substring(mu.start(), mu.end());
+                        // Iterate over wind units
+                        for (WindUnits unit : WindUnits.values()) {
+                            Matcher ma = Pattern.compile(unit.getRegExp()).matcher(u);
+                            if (ma.find()) {
+                                // Append units
+                                String du = unit.getDecoded();
+                                // Set the decoded string
+                                d = code.getDecoded() + ": " + b + " " + du;
+                                // Consume units
+                                block = block.replace(u, "");
+                                break;
+                            } else {
+                                d = code.getDecoded() + b;
+                            }
+                        }
+                    }
                 } else {
                     // Append matching substring to code type name
                     d = code.getDecoded() + ": " + b;
