@@ -15,15 +15,28 @@ public class WxDecoder implements BaseBlockDecoder {
     @Override
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
         Map<String, BaseMetarCode> result = new LinkedHashMap<>();
+        boolean isSecondLoop = false;
+        String desc = "";
 
-        //Only one of each of these codes in date time block
         for (WxCodes code : WxCodes.values()) {
             // Get the pattern and matcher for this code type
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
                 // Get the matching substring
                 String b = block.substring(m.start(), m.end());
-                String d = code.getDecoded() + " ";
+                String d;
+                if (code.isDesc()) {
+                    isSecondLoop = true;
+                    desc = code.getDecoded() + " ";
+                    block = block.replace(b, "");
+                    continue;
+                } else {
+                    if (isSecondLoop) {
+                        d = desc + code.getDecoded();
+                    } else {
+                        d = code.getDecoded() + " ";
+                    }
+                }
                 // Add onto result map
                 result.put(d, code);
                 // Consume matched substring
