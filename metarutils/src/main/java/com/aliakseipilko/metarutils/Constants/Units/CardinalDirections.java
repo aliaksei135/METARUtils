@@ -4,14 +4,14 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 
 public enum CardinalDirections implements BaseMetarCode {
-    N("North", "N"),
-    NE("North East", "NE"),
-    E("East", "E"),
-    SE("South East", "SE"),
-    S("South", "S"),
-    SW("South West", "SW"),
-    W("West", "W"),
-    NW("North West", "NW");
+    N("North", "N$"),
+    NE("North East", "NE$"),
+    E("East", "E$"),
+    SE("South East", "SE$"),
+    S("South", "S$"),
+    SW("South West", "SW$"),
+    W("West", "W$"),
+    NW("North West", "NW$");
 
     private final String decode;
     private final String regExp;

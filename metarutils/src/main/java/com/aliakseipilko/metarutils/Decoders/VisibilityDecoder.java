@@ -23,21 +23,22 @@ public class VisibilityDecoder implements BaseBlockDecoder {
             if (m.find()) {
                 String b = block.substring(m.start(), m.end());
                 String d = b + " " + unit.getDecoded();
-                result.put(d, unit);
                 block = block.replace(b, "");
+                if (block.length() != 0) {
+                    for (CardinalDirections direction : CardinalDirections.values()) {
+                        Matcher md = Pattern.compile(direction.getRegExp()).matcher(block);
+                        if (md.find()) {
+                            d = d + " to the " + direction.getDecoded();
+                            block = block.replace(block.substring(md.start(), md.end()), "");
+                            break;
+                        }
+                    }
+                }
+                result.put(d, unit);
                 break;
             }
         }
 
-        if (block.length() != 0) {
-            for (CardinalDirections direction : CardinalDirections.values()) {
-                Matcher m = Pattern.compile(direction.getRegExp()).matcher(block);
-                if (m.find()) {
-                    result.put(direction.getDecoded(), direction);
-                    block = block.replace(block.substring(m.start(), m.end()), "");
-                }
-            }
-        }
 
         if (block.length() != 0) {
             result.put(block, UnknownCodes.UKNWN);
