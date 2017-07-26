@@ -4,11 +4,11 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 
 public enum RVRCodes implements BaseMetarCode {
-    RWY("Runway", "^((?<=R)[0-3][0-9](L|C|R)?)"),
+    RWY("Runway", "((?<=^R)[0-3][0-9](L|C|R)?)"),
     RWY_VIS("Runway Visibility", "((?<=\\/)([0-9]{4}))"),
-    VIS_TREND_UP("and Increasing", "((?<=[0-9]{4})U)$"),
-    VIS_TREND_DWN("and Decreasing", "((?<=[0-9]{4})D)$"),
-    VIS_TREND_NONE("and Not Changing", "((?<=[0-9]{4})N)$");
+    VIS_TREND_UP("and Increasing", "U$"),
+    VIS_TREND_DWN("and Decreasing", "D$"),
+    VIS_TREND_NONE("and Not Changing", "N$");
 
 
     private final String decode;

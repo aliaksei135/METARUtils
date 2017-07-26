@@ -223,8 +223,11 @@ public class MetarUtils {
                 //TODO This bit is pretty horrible, Redo when it's not 200 degrees outside and i can think straight
                 Map<String, BaseMetarCode> existing = (Map<String, BaseMetarCode>) decodedMap.get(block);
                 Map<String, ? extends BaseMetarCode> additional = decoder.decodeToMap(entry.getKey());
-                Map.Entry<String, ? extends BaseMetarCode> addEntry = additional.entrySet().iterator().next();
-                existing.put(addEntry.getKey(), entry.getValue());
+                Iterator<? extends Map.Entry<String, ? extends BaseMetarCode>> addIter = additional.entrySet().iterator();
+                while (addIter.hasNext()) {
+                    existing.put(addIter.next().getKey(), entry.getValue());
+                }
+
             } else {
                 //Add the block with the decoded pair from the decoder
                 decodedMap.put(block, decoder.decodeToMap(entry.getKey()));

@@ -20,16 +20,22 @@ public class RVRDecoder implements BaseBlockDecoder {
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
                 String b = block.substring(m.start(), m.end());
-                String d;
+                String d = "";
                 if (code == RVRCodes.VIS_TREND_DWN
                         || code == RVRCodes.VIS_TREND_NONE
                         || code == RVRCodes.VIS_TREND_UP) {
                     d = code.getDecoded();
-                } else {
+                    block = block.replace(b, "");
+                } else if (code == RVRCodes.RWY) {
                     d = code.getDecoded() + ": " + b;
+                    block = block.replace("R" + b, "");
+                } else if (code == RVRCodes.RWY_VIS) {
+                    // RVR is always in metres, so can hardcode
+                    d = code.getDecoded() + ": " + b + "Metres";
+                    block = block.replace("/" + b, "");
                 }
                 result.put(d, code);
-                block = block.replace(b, "");
+
             }
         }
 
