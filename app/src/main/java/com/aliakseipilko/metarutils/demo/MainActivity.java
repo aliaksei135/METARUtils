@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.test_one_btn)
     Button builtInTestBtn;
+    @BindView(R.id.test_two_btn)
+    Button USTestCaseBtn;
     @BindView(R.id.metar_et)
     EditText customMetarET;
     @BindView(R.id.decode_metar_btn)
@@ -47,8 +49,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.test_one_btn)
-    public void decodeSetMetar() {
-        final String metar = getResources().getString(R.string.metar);
+    public void decodeSetUKMetar() {
+        final String metar = getResources().getString(R.string.uk_metar);
+        new AlertDialog.Builder(this)
+                .setTitle("METAR Test")
+                .setMessage("Decoding this METAR:\n" + metar)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        decodeMetar(metar);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+    }
+
+    @OnClick(R.id.test_two_btn)
+    public void decodeSetUSMetar() {
+        final String metar = getString(R.string.us_metar);
         new AlertDialog.Builder(this)
                 .setTitle("METAR Test")
                 .setMessage("Decoding this METAR:\n" + metar)

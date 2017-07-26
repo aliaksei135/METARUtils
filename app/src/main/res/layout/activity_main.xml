@@ -32,8 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Test Case" />
+            android:text="UK Test Case" />
 
+        <Button
+            android:id="@+id/test_two_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="US Test Case" />
 
         <EditText
             android:id="@+id/metar_et"

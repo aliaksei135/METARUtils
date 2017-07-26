@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">METAR Utils Demo</string>
     <string name="action_settings">Settings</string>
+    <string name="uk_metar">EGLL 231020Z 02006KT 4000 0900NE R27/0600U R32/0150D PRFG OVC007 12/11 Q1028</string>
+    <string name="us_metar">KJFK 261751Z 17008KT 10SM FEW040 FEW330 23/15 A3022 RMK AO2 SLP233 T02330150 10239 20200 58009</string>
 </resources>
