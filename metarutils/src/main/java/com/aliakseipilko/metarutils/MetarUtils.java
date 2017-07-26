@@ -148,7 +148,7 @@ public class MetarUtils {
                         RMKString = "";
                     }
                     RMKString = RMKString + " " + token;
-                    continue blockLoop;
+                    continue tokenLoop;
                 }
                 // Check if after TREND block, if so then must be a Trend
                 if(isAfterTrend){
@@ -156,7 +156,7 @@ public class MetarUtils {
                         TRENDString = "";
                     }
                     TRENDString = TRENDString + " " + token;
-                    continue blockLoop;
+                    continue tokenLoop;
                 }
                 // Check if after WS block, if so then must be windshear rwys
                 if (isAfterWS) {
@@ -164,7 +164,7 @@ public class MetarUtils {
                         WSString = "";
                     }
                     WSString = WSString + " " + token;
-                    continue blockLoop;
+                    continue tokenLoop;
                 }
                 if(token.matches(block.getRegExp())){
                     // Store block type in synced array
