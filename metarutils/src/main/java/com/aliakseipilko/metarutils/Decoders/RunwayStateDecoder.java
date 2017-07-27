@@ -16,6 +16,8 @@ public class RunwayStateDecoder implements BaseBlockDecoder {
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
         Map<String, BaseMetarCode> result = new LinkedHashMap<>();
 
+        block = block.replace("/", "");
+
         for (RunwayStateCodes code : RunwayStateCodes.values()) {
             Matcher m = Pattern.compile(code.getRegExp()).matcher(block);
             if (m.find()) {
@@ -23,16 +25,21 @@ public class RunwayStateDecoder implements BaseBlockDecoder {
                 String d;
                 switch (code) {
                     case RWY:
-                        d = code.getDecoded() + " " + b;
+                        if (b.startsWith("R")) {
+                            String h = b.substring(1, b.length());
+                            d = code.getDecoded() + " " + h + ":";
+                        } else {
+                            d = code.getDecoded() + " " + b + ":";
+                        }
                         break;
                     case RWY_DEPST_DTH:
-                        d = code.getDecoded() + ": " + b + "mm";
+                        d = "\t" + code.getDecoded() + ": " + b + "mm";
                         break;
                     case RWY_FRIC:
-                        d = code.getDecoded() + ": 0." + b;
+                        d = "\t" + code.getDecoded() + ": 0." + b;
                         break;
                     default:
-                        d = code.getDecoded();
+                        d = "\t" + code.getDecoded();
                 }
                 block = block.replace(b, "");
                 result.put(d, code);

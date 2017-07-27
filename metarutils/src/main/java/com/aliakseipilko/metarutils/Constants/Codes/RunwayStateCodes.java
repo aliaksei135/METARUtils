@@ -4,10 +4,10 @@ import com.aliakseipilko.metarutils.Constants.BaseMetarCode;
 
 
 public enum RunwayStateCodes implements BaseMetarCode {
-    RWY("Runway", "^([0-3][0-9])"),
+    RWY("Runway", "^R?([0-3][0-9])(L|C|R)?"),
     ALL_RWYS("All Runways", "^(88)"),
 
-    RWY_DEP_CLRD("Runway Deposits Cleared", "(CLRD)(?=(([0-9]{2})|\\/\\/))"),
+    RWY_DEP_CLRD("Deposits Cleared", "(CLRD)(?=(([0-9]{2})|\\/\\/))"),
 
     //Runway Deposits
     RWY_DEPST_CLR("Clear and Dry", "(0)(?=(((1|2|5|9)|(\\/))(([0-9]{2})|(\\/\\/))(([0-9]{2})|(\\/\\/))))"),
@@ -44,14 +44,14 @@ public enum RunwayStateCodes implements BaseMetarCode {
     RWY_DEPST_DTH_UNKWN("Deposit Depth Not significant", "(\\/\\/)(?=((([0-9]{2})|(\\/\\/)))$)"),
 
     //Friction Coeff and Braking
-    RWY_FRIC("Runway Friction Coefficient", "(([0-8][0-9])|90)$"),
-    RWY_BRK_POOR("Runway Braking Action Poor", "(91)$"),
-    RWY_BRK_MEDPOOR("Runway Braking Action Medium/Poor", "(92)$"),
-    RWY_BRK_MED("Runway Braking Action Medium", "(93)$"),
-    RWY_BRK_MEDGD("Runway Braking Action Medium/Good", "(94)$"),
-    RWY_BRK_GD("Runway Braking Action Good", "(95)$"),
-    RWY_BRK_UNREL("Runway Braking Figures Unreliable", "(99)$"),
-    RWY_BRK_UNKWN("Runway Braking Action Not Reported", "(\\/\\/)$");
+    RWY_FRIC("Friction Coefficient", "(([0-8][0-9])|90)$"),
+    RWY_BRK_POOR("Braking Action Poor", "(91)$"),
+    RWY_BRK_MEDPOOR("Braking Action Medium/Poor", "(92)$"),
+    RWY_BRK_MED("Braking Action Medium", "(93)$"),
+    RWY_BRK_MEDGD("Braking Action Medium/Good", "(94)$"),
+    RWY_BRK_GD("Braking Action Good", "(95)$"),
+    RWY_BRK_UNREL("Braking Figures Unreliable", "(99)$"),
+    RWY_BRK_UNKWN("Braking Action Not Reported", "(\\/\\/)$");
 
     private String decode;
     private String regExp;

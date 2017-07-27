@@ -231,7 +231,13 @@ public class MetarUtils {
                 Map<String, ? extends BaseMetarCode> additional = decoder.decodeToMap(entry.getKey());
                 Iterator<? extends Map.Entry<String, ? extends BaseMetarCode>> addIter = additional.entrySet().iterator();
                 while (addIter.hasNext()) {
-                    existing.put(addIter.next().getKey(), entry.getValue());
+                    // This is very hacky, Find a better way around this
+                    String key = addIter.next().getKey();
+                    if (existing.containsKey(key)) {
+                        existing.put((key + " "), entry.getValue());
+                    } else {
+                        existing.put(key, entry.getValue());
+                    }
                 }
 
             } else {
