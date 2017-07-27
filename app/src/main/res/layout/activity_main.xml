@@ -41,6 +41,20 @@
             android:layout_marginTop="20dp"
             android:text="US Test Case" />
 
+        <Button
+            android:id="@+id/test_three_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="UK Military Test Case" />
+
+        <Button
+            android:id="@+id/test_four_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Russia Test Case" />
+
         <EditText
             android:id="@+id/metar_et"
             android:layout_width="match_parent"

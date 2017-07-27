@@ -82,6 +82,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.test_three_btn)
+    public void decodeSetUKMilMetar() {
+        final String metar = getString(R.string.uk_mil_metar);
+        new AlertDialog.Builder(this)
+                .setTitle("METAR Test")
+                .setMessage("Decoding this METAR:\n" + metar)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        decodeMetar(metar);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+    }
+
+    @OnClick(R.id.test_four_btn)
+    public void decodeSetRUSMetar() {
+        final String metar = getString(R.string.rus_metar);
+        new AlertDialog.Builder(this)
+                .setTitle("METAR Test")
+                .setMessage("Decoding this METAR:\n" + metar)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        decodeMetar(metar);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
     public void decodeMetar(String metar) {
         MetarUtils metarUtils = new MetarUtils();
         String decode = "";

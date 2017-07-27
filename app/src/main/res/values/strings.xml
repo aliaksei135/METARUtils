@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="uk_metar">EGLL 231020Z 02006KT 4000 0900NE R27/0600U R32/0150D PRFG OVC007 12/11 Q1028</string>
     <string name="us_metar">KJFK 261751Z 17008KT 10SM FEW040 FEW330 23/15 A3022 RMK AO2 SLP233 T02330150 10239 20200 58009</string>
+    <string name="uk_mil_metar">EGVN 271332Z 25011KT 9999 7000SW -SHRA BKN035 BKN120 18/10 Q1005 WHT TEMPO 9999 NSW BLU</string>
+    <string name="rus_metar">UUEE 271330Z 27007MPS 9999 SCT046 26/16 Q1007 R24R/CLRD62 R24L/CLRD62 NOSIG</string>
 </resources>
