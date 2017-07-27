@@ -43,7 +43,7 @@ public class MetarUtils {
         return decodedMetar;
     }
 
-    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException, IllegalAccessException, InstantiationException {
+    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException {
         // Tokenise string
         List<String> tokens = Arrays.asList(metar.split(" "));
 
@@ -216,7 +216,13 @@ public class MetarUtils {
             //Get the METARBlock for this block
             MetarBlock block = entry.getValue();
             //Get the decoder for this block and instantiate it
-            BaseBlockDecoder decoder = block.getDecodingClass().newInstance();
+            BaseBlockDecoder decoder;
+            try {
+                decoder = block.getDecodingClass().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new MetarDecodeException("Could not instantiate block decoding class");
+            }
 
             //Ensures keys are unique in map, otherwise this results in rewrites and loss of info
             if (decodedMap.containsKey(block)) {
