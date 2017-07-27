@@ -32,11 +32,12 @@ public class MilitaryColourDecoder implements BaseBlockDecoder {
                     String b = block.substring(m.start(), m.end());
                     String d;
                     if (isBlack) {
-                        d = "Military Colour Code: " + MilitaryColourCodes.BLK.getDecoded() + " " + code.getDecoded();
+                        d = MilitaryColourCodes.BLK.getDecoded() + " " + code.getDecoded();
                     } else {
-                        d = "Military Colour Code: " + code.getDecoded();
+                        d = code.getDecoded();
                     }
                     result.put(d, code);
+                    block = block.replace(b, "");
                 }
             }
         }
