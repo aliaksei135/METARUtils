@@ -16,11 +16,7 @@ import static com.aliakseipilko.metarutils.Constants.MetarBlock.TREND;
 
 public class MetarUtils {
 
-    public MetarUtils() {
-
-    }
-
-    public String decodeMetarToString(String metar) throws MetarDecodeException, InstantiationException, IllegalAccessException {
+    public static String decodeMetarToString(String metar) throws MetarDecodeException {
 
         Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodedMap = decodeMetarToMap(metar);
         Iterator<Map.Entry<MetarBlock, Map<String, ? extends BaseMetarCode>>> blockIter = decodedMap.entrySet().iterator();
@@ -43,7 +39,7 @@ public class MetarUtils {
         return decodedMetar;
     }
 
-    public Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException {
+    public static Map<MetarBlock, Map<String, ? extends BaseMetarCode>> decodeMetarToMap(String metar) throws MetarDecodeException {
         // Tokenise string
         List<String> tokens = Arrays.asList(metar.split(" "));
 
