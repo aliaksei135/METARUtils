@@ -13,8 +13,13 @@ public class TrendDecoder implements BaseBlockDecoder {
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
         Map<String, BaseMetarCode> result = new LinkedHashMap<>();
 
-        // This block is too freeform to decode effectively
-        result.put(block, MetarBlock.TREND);
+        if (block.trim().equals("NOSIG")) {
+            result.put("No Significant Changes Forecast", MetarBlock.TREND);
+        } else {
+            // This block is too freeform to decode effectively
+            // This is something to implement in the future
+            result.put(block, MetarBlock.TREND);
+        }
 
         return result;
     }
