@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
         MetarUtils metarUtils = new MetarUtils();
         String decode = "";
         try {
-            decode = metarUtils.decodeMetarToString(metar);
-        } catch (MetarDecodeException | InstantiationException | IllegalAccessException e) {
+            decode = MetarUtils.decodeMetarToString(metar);
+        } catch (MetarDecodeException e) {
             e.printStackTrace();
         }
         displayResult(decode);
