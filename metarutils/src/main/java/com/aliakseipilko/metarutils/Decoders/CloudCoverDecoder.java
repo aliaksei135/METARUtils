@@ -31,8 +31,18 @@ public class CloudCoverDecoder implements BaseBlockDecoder {
                         || code == CloudCoverCodes.UNDET_CLD) {
                     d = code.getDecoded() + " Cloud";
                 } else {
+                    // Convert to normal order of magnitude
+                    String h = b + "00";
+                    // Remove the 0 from the start
+                    while (h.startsWith("0")) {
+                        h = h.substring(1, h.length());
+                    }
+                    // Ensure that h cannot be null
+                    if (h.isEmpty()) {
+                        h = "0";
+                    }
                     // Hardcode Feet, as its the only unit used for this
-                    d = code.getDecoded() + " at " + b + " hundred feet";
+                    d = code.getDecoded() + " at " + h + " feet";
                 }
                 result.put(d, code);
                 // Consume matched substring
