@@ -16,6 +16,8 @@ public class TrendDecoder implements BaseBlockDecoder {
         if (block.trim().equals("NOSIG")) {
             result.put("No Significant Changes Forecast", MetarBlock.TREND);
         } else {
+            block = block.replace("BECMG", "");
+            block = block.replace("TEMPO", "");
             // This block is too freeform to decode effectively
             // This is something to implement in the future
             result.put(block, MetarBlock.TREND);

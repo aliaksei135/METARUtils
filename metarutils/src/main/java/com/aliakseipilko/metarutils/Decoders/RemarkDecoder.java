@@ -13,6 +13,8 @@ public class RemarkDecoder implements BaseBlockDecoder {
     public Map<String, ? extends BaseMetarCode> decodeToMap(String block) throws MetarDecodeException {
         Map<String, BaseMetarCode> result = new LinkedHashMap<>();
 
+        block = block.replace("RMK", "");
+
         // This block is too freeform to decode effectively
         result.put(block, MetarBlock.RMK);
 
