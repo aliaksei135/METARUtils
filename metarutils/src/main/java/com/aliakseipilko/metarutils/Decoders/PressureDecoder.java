@@ -24,11 +24,11 @@ public class PressureDecoder implements BaseBlockDecoder {
                 if (unit == PressureUnits.INHG) {
                     String c = block.substring(0, 2) + "." + block.substring(2, 4);
                     d = c + " " + unit.getDecoded();
-                    block = block.replace(c, "");
+                    block = "";
                 } else {
                     String c = block.substring(0, 4);
                     d = c + " " + unit.getDecoded();
-                    block = block.replace(c, "");
+                    block = "";
                 }
                 result.put(d, unit);
                 break;
